@@ -1,8 +1,12 @@
+# Definition for singly-linked list.
+# class ListNode(object):
+#     def __init__(self, val=0, next=None):
+#         self.val = val
+#         self.next = next
 class Solution(object):
-    def twoSum(self, nums, target):
+    def addTwoNumbers(self, l1, l2):
         """
-        :type nums: List[int]
-        :type target: int
-        :rtype: List[int]
+        :type l1: Optional[ListNode]
+        :type l2: Optional[ListNode]
+        :rtype: Optional[ListNode]
         """
-        
