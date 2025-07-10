@@ -1,33 +1,33 @@
-# Definition for singly-linked list.
-class ListNode:
-    def __init__(self, val=0, next=None):
-        self.val = val
-        self.next = next
+class Solution(object):
+    def lengthOfLongestSubstring(self, s):
+        """
+        :type s: str
+        :rtype: int
+        """
 
-class Solution:
-    def addTwoNumbers(self, l1, l2):
-        dummy = ListNode()
-        current = dummy
-        carry = 0
+        # Set to store characters currently in the substring window
+        char_set = set()
 
-        # add or carry in the edge case of un even integers
-        while l1 or l2 or carry:
-            #place value in variable if there is a value still else value is zero
-            val1 = l1.val if l1 else 0
-            val2 = l2.val if l2 else 0
+        # Left pointer of the sliding window
+        left = 0
 
-            total = val1 + val2 + carry
+        # Tracks the maximum length of substring found so far
+        max_len = 0
 
-            # extracts the digit that needs to be carried over to the next step.
-            carry = total // 10
+        # Loop through the string with the right pointer
+        for right in range(len(s)):
 
-            # makes the value of next only the ones place from total 
-            current.next = ListNode(total % 10)  
-            
-            #update pointers
-            current = current.next
-            if l1: l1 = l1.next if l1 else None
-            if l2: l2 = l2.next if l2 else None
+            # If the character at 'right' is already in the set, it means a duplicate is found
+            # Move 'left' forward to remove duplicates until 's[right]' can be added safely
+            while s[right] in char_set:
+                char_set.remove(s[left])
+                left += 1
 
-        return dummy.next
+            # Add the current character to the set (it's now unique in the window)
+            char_set.add(s[right])
 
+            # Update max_len to reflect the length of the current valid window
+            max_len = max(max_len, right - left + 1)
+
+        # Return the maximum length found
+        return max_len
